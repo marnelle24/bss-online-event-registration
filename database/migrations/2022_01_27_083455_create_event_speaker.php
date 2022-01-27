@@ -16,8 +16,8 @@ class CreateEventSpeaker extends Migration
         Schema::create('event_speaker', function (Blueprint $table) {
             $table->integer('event_id');
             $table->integer('speaker_id');
-            $table->integer('order');
-            $table->text('settings');
+            $table->integer('order')->nullable();
+            $table->text('settings')->nullable();
         });
     }
 

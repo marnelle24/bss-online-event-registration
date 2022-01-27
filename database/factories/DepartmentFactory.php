@@ -26,8 +26,8 @@ class DepartmentFactory extends Factory
             'name'          => $name,
             'code'          => $this->faker->unique()->randomLetter(5),
             'slug'          => Str::slug($name),
-            'description'   => $this->faker->sentence(40),
-            'avatar'        =>Storage::disk('public')->put('speaker_avatar', $imageFile)
+            'details'       => $this->faker->sentence(1),
+            'icon'        =>Storage::disk('public')->put('department_icon', $imageFile)
 
         ];
     }

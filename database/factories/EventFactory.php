@@ -38,7 +38,7 @@ class EventFactory extends Factory
             'venue'                     => $eventType === 'online' ? NULL : $this->faker->address(),
             'onlineEventDetails'        => $eventType === 'online' ? "{ 'platform':'zoom', 'platform_id':'1234455', 'password': '51413' }" : NULL,
             'description'               => $this->faker->sentence(50),
-            'posterPath'                => Storage::disk('public')->put('images', $imageFile),
+            'posterPath'                => Storage::disk('public')->put('event_images/poster', $imageFile),
             'startDate'                 => $startDate,
             'endDate'                   => $endDate,
             'startTime'                 => $startTime,

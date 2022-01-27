@@ -15,8 +15,8 @@ class CreateEventsTable extends Migration
     {
         Schema::create('events', function (Blueprint $table) {
             $table->id();
-            $table->string('programID');
-            $table->string('programCode');
+            $table->string('programID')->unique();
+            $table->string('programCode')->unique();
             $table->string('title');
             $table->string('slug')->unique();
             $table->string('eventType');                        // 1. online event 2. non-online event
