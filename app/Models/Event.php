@@ -15,4 +15,14 @@ class Event extends Model
     {
         return $this->belongsToMany(Category::class, 'category_event');
     }
+
+    public function speakers()
+    {
+        return $this->belongsToMany(Speaker::class, 'event_speaker');
+    }
+
+    public function departments()
+    {
+        return $this->belongsToMany(Department::class, 'department_event');
+    }
 }
