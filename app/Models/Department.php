@@ -13,7 +13,7 @@ class Department extends Model
 
     public function events()
     {
-        return $this->belongsToMany(Events::class, 'department_event');
+        return $this->belongsToMany(Event::class, 'department_event');
     }
 
 }

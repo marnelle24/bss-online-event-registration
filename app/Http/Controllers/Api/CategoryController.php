@@ -12,8 +12,21 @@ class CategoryController extends Controller
     //return all categories
     public function index() 
     {
-        $events = Category::all();
-        return $events;
+        $categories = Category::with('events')
+            ->get();
+
+        return $categories;
+
+    }
+
+    //get specific category
+    public function show($id) {
+
+        $category = Category::where('id', $id)
+            ->with('events')
+            ->first();
+
+        return $category;
 
     }
 

@@ -12,15 +12,18 @@ class EventController extends Controller
     //return all events with categories
     public function index() 
     {
-        $events = Event::with('categories:id,name')->get();
+        $events = Event::with('categories:id,slug,name')
+            ->get();
         return $events;
 
     }
 
-    //return all events with categories
+    //return specific event with categories
     public function show($id) 
     {
-        $event = Event::where('id', $id)->get();
+        $event = Event::where('id', $id)
+            ->with('categories:id,slug,name')
+            ->get();
         return $event;
 
     }

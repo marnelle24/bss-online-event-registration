@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\Api\CategoryController;
 use App\Http\Controllers\Api\EventController;
+use App\Http\Controllers\Api\DepartmentController;
 
 /*
 |--------------------------------------------------------------------------
@@ -27,3 +28,9 @@ Route::get('/events', [EventController::class, 'index']);
 Route::get('/event/{id}', [EventController::class, 'show']);
 
 Route::get('/categories', [CategoryController::class, 'index']);
+
+Route::get('/category/{id}', [CategoryController::class, 'show']);
+
+Route::get('/departments', [DepartmentController::class, 'index']);
+
+Route::get('/department/{id}', [DepartmentController::class, 'show']);

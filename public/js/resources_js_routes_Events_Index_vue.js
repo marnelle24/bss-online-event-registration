@@ -17,7 +17,39 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({});
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  computed: {
+    events: function events() {
+      return this.$store.state.events;
+    }
+  },
+  methods: {
+    trimTextContent: function trimTextContent(str, maxLen) {
+      var separator = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : ' ';
+      var addEllipses = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : '...';
+      if (str.length <= maxLen) return str;
+      return str.substr(0, str.lastIndexOf(separator, maxLen)) + addEllipses;
+    }
+  }
+});
 
 /***/ }),
 
@@ -105,18 +137,93 @@ var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
+  return _c("div", [
+    _c(
+      "div",
+      {
+        staticClass:
+          "p-10 grid grid-cols-1 sm:grid-cols-1 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-3 gap-5",
+      },
+      _vm._l(_vm.events, function (event) {
+        return _c(
+          "div",
+          { key: event.id, staticClass: "rounded overflow-hidden shadow-lg" },
+          [
+            _c("img", {
+              staticClass: "w-full",
+              attrs: { src: "/storage/" + event.posterPath, alt: "Forest" },
+            }),
+            _vm._v(" "),
+            _c("div", { staticClass: "px-6 py-4" }, [
+              _c(
+                "div",
+                { staticClass: "font-bold text-xl mb-2" },
+                [
+                  _c(
+                    "router-link",
+                    {
+                      attrs: {
+                        to: {
+                          name: "event.show",
+                          params: { slug: event.slug },
+                        },
+                      },
+                    },
+                    [
+                      _vm._v(
+                        "\n                        " +
+                          _vm._s(_vm.trimTextContent(event.title, 100)) +
+                          "\n                    "
+                      ),
+                    ]
+                  ),
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c("p", { staticClass: "text-gray-700 text-base" }, [
+                _vm._v(_vm._s(_vm.trimTextContent(event.description, 200))),
+              ]),
+            ]),
+            _vm._v(" "),
+            _c(
+              "div",
+              { staticClass: "px-6 pt-4 pb-2" },
+              _vm._l(event.categories, function (category) {
+                return _c(
+                  "span",
+                  {
+                    key: category.id,
+                    staticClass:
+                      "inline-block hover:bg-gray-400 bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2 cursor-pointer",
+                  },
+                  [
+                    _c(
+                      "router-link",
+                      {
+                        attrs: {
+                          to: {
+                            name: "category.show",
+                            params: { slug: category.slug },
+                          },
+                        },
+                      },
+                      [_vm._v(_vm._s(category.slug))]
+                    ),
+                  ],
+                  1
+                )
+              }),
+              0
+            ),
+          ]
+        )
+      }),
+      0
+    ),
+  ])
 }
-var staticRenderFns = [
-  function () {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", [
-      _c("h1", { staticClass: "text-xl" }, [_vm._v("Here are our Events!")]),
-    ])
-  },
-]
+var staticRenderFns = []
 render._withStripped = true
 
 

@@ -2072,7 +2072,12 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  name: 'main-app'
+  name: 'main-app',
+  created: function created() {
+    this.$store.dispatch('getEvents').then(function (_) {})["catch"](function (error) {
+      return console.log(error);
+    });
+  }
 });
 
 /***/ }),
@@ -2165,6 +2170,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 var routes = [{
   path: '/',
+  redirect: {
+    name: 'events.index'
+  }
+}, {
+  path: '/events',
   name: 'events.index',
   component: function component() {
     return __webpack_require__.e(/*! import() */ "resources_js_routes_Events_Index_vue").then(__webpack_require__.bind(__webpack_require__, /*! ./routes/Events/Index.vue */ "./resources/js/routes/Events/Index.vue"));
@@ -2174,6 +2184,36 @@ var routes = [{
   name: 'event.show',
   component: function component() {
     return __webpack_require__.e(/*! import() */ "resources_js_routes_Events_Show_vue").then(__webpack_require__.bind(__webpack_require__, /*! ./routes/Events/Show.vue */ "./resources/js/routes/Events/Show.vue"));
+  }
+}, {
+  path: '/categories',
+  name: 'categories.index',
+  component: function component() {
+    return __webpack_require__.e(/*! import() */ "resources_js_routes_Category_Index_vue").then(__webpack_require__.bind(__webpack_require__, /*! ./routes/Category/Index.vue */ "./resources/js/routes/Category/Index.vue"));
+  }
+}, {
+  path: '/category/:slug',
+  name: 'category.show',
+  component: function component() {
+    return __webpack_require__.e(/*! import() */ "resources_js_routes_Category_Show_vue").then(__webpack_require__.bind(__webpack_require__, /*! ./routes/Category/Show.vue */ "./resources/js/routes/Category/Show.vue"));
+  }
+}, {
+  path: '/checkout',
+  name: 'order.checkout',
+  component: function component() {
+    return __webpack_require__.e(/*! import() */ "resources_js_routes_Order_Checkout_vue").then(__webpack_require__.bind(__webpack_require__, /*! ./routes/Order/Checkout.vue */ "./resources/js/routes/Order/Checkout.vue"));
+  }
+}, {
+  path: '/summary',
+  name: 'order.summary',
+  component: function component() {
+    return __webpack_require__.e(/*! import() */ "resources_js_routes_Order_Summary_vue").then(__webpack_require__.bind(__webpack_require__, /*! ./routes/Order/Summary.vue */ "./resources/js/routes/Order/Summary.vue"));
+  }
+}, // Redirections
+{
+  path: '/category',
+  redirect: {
+    name: 'categories.index'
   }
 }];
 
@@ -2193,7 +2233,47 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   state: {
     events: [],
-    departments: []
+    departments: [],
+    categories: [],
+    cart: []
+  },
+  mutations: {
+    updateEvents: function updateEvents(state, events) {
+      state.events = events;
+    },
+    addToCart: function addToCart(state, event) {
+      // check if the selected event is already in the cart
+      var eventInCartIndex = state.cart.findIndex(function (item) {
+        return item.slug === event.slug;
+      }); // if the event is already selected
+
+      if (eventInCartIndex !== -1) {
+        alert('Selected item already in the cart.');
+        return;
+      }
+
+      state.cart.push(event);
+    },
+    removeFromCart: function removeFromCart(state, index) {
+      state.cart.splice(index, 1);
+    },
+    updateCart: function updateCart(state, cart) {
+      state.cart = cart;
+    }
+  },
+  actions: {
+    getEvents: function getEvents(_ref) {
+      var commit = _ref.commit;
+      axios.get('/api/events').then(function (response) {
+        commit('updateEvents', response.data);
+      })["catch"](function (error) {
+        console.log(error);
+      });
+    },
+    clearCart: function clearCart(_ref2) {
+      var commit = _ref2.commit;
+      commit('updateCart', []);
+    }
   }
 });
 
@@ -19706,17 +19786,7 @@ var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    [
-      _c("h2", { staticClass: "text-xl" }, [
-        _vm._v("Hello World. Main App vue here"),
-      ]),
-      _vm._v(" "),
-      _c("router-view"),
-    ],
-    1
-  )
+  return _c("div", [_c("router-view")], 1)
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -36421,7 +36491,7 @@ module.exports = JSON.parse('{"_from":"axios@^0.21","_id":"axios@0.21.4","_inBun
 /******/ 		// This function allow to reference async chunks
 /******/ 		__webpack_require__.u = (chunkId) => {
 /******/ 			// return url for filenames not based on template
-/******/ 			if ({"resources_js_routes_Events_Index_vue":1,"resources_js_routes_Events_Show_vue":1}[chunkId]) return "js/" + chunkId + ".js";
+/******/ 			if ({"resources_js_routes_Events_Index_vue":1,"resources_js_routes_Events_Show_vue":1,"resources_js_routes_Category_Index_vue":1,"resources_js_routes_Category_Show_vue":1,"resources_js_routes_Order_Checkout_vue":1,"resources_js_routes_Order_Summary_vue":1}[chunkId]) return "js/" + chunkId + ".js";
 /******/ 			// return url for filenames based on template
 /******/ 			return undefined;
 /******/ 		};
