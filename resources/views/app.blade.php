@@ -8,7 +8,6 @@
 
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
-
         <link rel="stylesheet" href="{{ mix('css/app.css') }}">
 
    
@@ -20,5 +19,13 @@
             </div>
         </div>
         <script src="{{ mix('js/app.js') }}"></script>
+        <script>
+            const btn = document.querySelector("button.mobile-menu-button");
+            const menu = document.querySelector(".mobile-menu");
+
+            btn.addEventListener("click", () => {
+                menu.classList.toggle("hidden");
+            });
+        </script>
     </body>
 </html>
