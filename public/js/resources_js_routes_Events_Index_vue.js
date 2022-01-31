@@ -33,6 +33,20 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: 'event-card',
   props: ['event'],
@@ -42,6 +56,13 @@ __webpack_require__.r(__webpack_exports__);
       var addEllipses = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : '...';
       if (str.length <= maxLen) return str;
       return str.substr(0, str.lastIndexOf(separator, maxLen)) + addEllipses;
+    },
+    formatCurrency: function formatCurrency(price) {
+      price = price / 100;
+      return price.toLocaleString('en-SG', {
+        style: 'currency',
+        currency: 'SGD'
+      });
     }
   }
 });
@@ -266,12 +287,85 @@ var render = function () {
           1
         ),
         _vm._v(" "),
-        _c("p", { staticClass: "text-gray-700 text-base" }, [
+        _c("p", { staticClass: "text-gray-700 text-sm" }, [
           _vm._v(
             "\n            " +
               _vm._s(_vm.trimTextContent(_vm.event.description, 200)) +
               "\n        "
           ),
+        ]),
+        _vm._v(" "),
+        _c("p", { staticClass: "mt-3" }, [
+          _c(
+            "svg",
+            {
+              staticClass: "h-6 w-6 text-gray-700 text-sm float-left mr-2",
+              attrs: {
+                xmlns: "http://www.w3.org/2000/svg",
+                fill: "none",
+                viewBox: "0 0 24 24",
+                stroke: "currentColor",
+              },
+            },
+            [
+              _c("path", {
+                attrs: {
+                  "stroke-linecap": "round",
+                  "stroke-linejoin": "round",
+                  "stroke-width": "2",
+                  d: "M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z",
+                },
+              }),
+            ]
+          ),
+          _vm._v(" "),
+          _c("span", { staticClass: "text-gray-700 text-sm" }, [
+            _vm._v(_vm._s(_vm.formatCurrency(_vm.event.price))),
+          ]),
+        ]),
+        _vm._v(" "),
+        _c("p", { staticClass: "mt-1" }, [
+          _c(
+            "svg",
+            {
+              staticClass: "h-6 w-6 text-gray-700 text-sm float-left mr-2",
+              attrs: {
+                xmlns: "http://www.w3.org/2000/svg",
+                fill: "none",
+                viewBox: "0 0 24 24",
+                stroke: "currentColor",
+              },
+            },
+            [
+              _c("path", {
+                attrs: {
+                  "stroke-linecap": "round",
+                  "stroke-linejoin": "round",
+                  "stroke-width": "2",
+                  d: "M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z",
+                },
+              }),
+              _vm._v(" "),
+              _c("path", {
+                attrs: {
+                  "stroke-linecap": "round",
+                  "stroke-linejoin": "round",
+                  "stroke-width": "2",
+                  d: "M15 11a3 3 0 11-6 0 3 3 0 016 0z",
+                },
+              }),
+            ]
+          ),
+          _vm._v(" "),
+          _c("span", { staticClass: "text-gray-700 text-xs" }, [
+            _vm._v(
+              _vm._s(
+                _vm.event.venue === null
+                  ? "Online Event"
+                  : _vm.trimTextContent(_vm.event.venue, 50)
+              )
+            ),
+          ]),
         ]),
       ]),
       _vm._v(" "),
@@ -284,7 +378,7 @@ var render = function () {
             {
               key: category.id,
               staticClass:
-                "inline-block hover:bg-gray-400 bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2 cursor-pointer",
+                "inline-block hover:bg-gray-400 bg-gray-200 rounded-full px-3 py-1 text-xs text-gray-700 mr-2 mb-2 cursor-pointer",
             },
             [
               _c(

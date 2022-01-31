@@ -2174,6 +2174,16 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: 'navigation',
   data: function data() {
@@ -19993,7 +20003,7 @@ var render = function () {
           _c("div", [
             _c(
               "a",
-              { staticClass: "flex items-center p-2", attrs: { href: "#" } },
+              { staticClass: "flex items-center p-2", attrs: { href: "/" } },
               [
                 _c("img", {
                   staticClass: "h-12 w-12 mr-2",
@@ -20003,7 +20013,74 @@ var render = function () {
             ),
           ]),
           _vm._v(" "),
-          _vm._m(0),
+          _c(
+            "div",
+            { staticClass: "hidden md:flex items-center space-x-1" },
+            [
+              _c(
+                "router-link",
+                {
+                  staticClass:
+                    "p-4 text-gray-500 font-semibold hover:text-green-500 transition duration-300",
+                  class: [
+                    _vm.$route.fullPath == "/events" ||
+                    _vm.$route.fullPath == "/event/" + _vm.$route.params.slug
+                      ? "border-b-4 border-green-500"
+                      : "",
+                  ],
+                  attrs: { to: { name: "events.index" } },
+                },
+                [_vm._v("\n\t\t\t\t\t\t\t\tEVENTS\n\t\t\t\t\t\t\t")]
+              ),
+              _vm._v(" "),
+              _c(
+                "a",
+                {
+                  staticClass:
+                    "p-4 text-gray-500 font-semibold hover:text-green-500 transition duration-300",
+                  attrs: { href: "" },
+                },
+                [_vm._v("COURSES")]
+              ),
+              _vm._v(" "),
+              _c(
+                "router-link",
+                {
+                  staticClass:
+                    "p-4 text-gray-500 font-semibold hover:text-green-500 transition duration-300",
+                  class: [
+                    _vm.$route.fullPath == "/categories" ||
+                    _vm.$route.fullPath == "/category/" + _vm.$route.params.slug
+                      ? "border-b-4 border-green-500"
+                      : "",
+                  ],
+                  attrs: { to: { name: "categories.index" } },
+                },
+                [_vm._v("\n\t\t\t\t\t\t\t\tCATEGORIES\n\t\t\t\t\t\t\t")]
+              ),
+              _vm._v(" "),
+              _c(
+                "a",
+                {
+                  staticClass:
+                    "p-4 text-gray-500 font-semibold hover:text-green-500 transition duration-300",
+                  attrs: { href: "" },
+                },
+                [_vm._v("ABOUT US")]
+              ),
+              _vm._v(" "),
+              _c(
+                "a",
+                {
+                  staticClass:
+                    "p-4 text-gray-500 font-semibold hover:text-green-500 transition duration-300",
+                  attrs: { href: "" },
+                },
+                [_vm._v("CONTACT US")]
+              ),
+            ],
+            1
+          ),
         ]),
         _vm._v(" "),
         _c("div", { staticClass: "hidden md:flex items-center" }, [
@@ -20149,66 +20226,10 @@ var render = function () {
       ]),
     ]),
     _vm._v(" "),
-    _vm._m(1),
+    _vm._m(0),
   ])
 }
 var staticRenderFns = [
-  function () {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "hidden md:flex items-center space-x-1" }, [
-      _c(
-        "a",
-        {
-          staticClass:
-            "border-b-4 border-green-500 p-4 text-gray-500 font-semibold hover:text-green-500 transition duration-300",
-          attrs: { href: "" },
-        },
-        [_vm._v("EVENTS")]
-      ),
-      _vm._v(" "),
-      _c(
-        "a",
-        {
-          staticClass:
-            "p-4 text-gray-500 font-semibold hover:text-green-500 transition duration-300",
-          attrs: { href: "" },
-        },
-        [_vm._v("COURSES")]
-      ),
-      _vm._v(" "),
-      _c(
-        "a",
-        {
-          staticClass:
-            "p-4 text-gray-500 font-semibold hover:text-green-500 transition duration-300",
-          attrs: { href: "" },
-        },
-        [_vm._v("CATEGORIES")]
-      ),
-      _vm._v(" "),
-      _c(
-        "a",
-        {
-          staticClass:
-            "p-4 text-gray-500 font-semibold hover:text-green-500 transition duration-300",
-          attrs: { href: "" },
-        },
-        [_vm._v("ABOUT US")]
-      ),
-      _vm._v(" "),
-      _c(
-        "a",
-        {
-          staticClass:
-            "p-4 text-gray-500 font-semibold hover:text-green-500 transition duration-300",
-          attrs: { href: "" },
-        },
-        [_vm._v("CONTACT US")]
-      ),
-    ])
-  },
   function () {
     var _vm = this
     var _h = _vm.$createElement

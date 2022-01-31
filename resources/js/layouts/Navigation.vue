@@ -5,15 +5,25 @@
 					<div class="flex space-x-7">
 						<div>
 							<!-- Website Logo -->
-							<a href="#" class="flex items-center p-2">
+							<a href="/" class="flex items-center p-2">
 								<img :src="logo" alt="Logo" class="h-12 w-12 mr-2">
 							</a>
 						</div>
 						<!-- Primary Navbar items -->
 						<div class="hidden md:flex items-center space-x-1">
-							<a href="" class="border-b-4 border-green-500 p-4 text-gray-500 font-semibold hover:text-green-500 transition duration-300">EVENTS</a>
+							<router-link 
+								:to="{ name: 'events.index'}" 
+								:class="[($route.fullPath=='/events' || $route.fullPath=='/event/'+ $route.params.slug) ? 'border-b-4 border-green-500' : '']"
+								class="p-4 text-gray-500 font-semibold hover:text-green-500 transition duration-300">
+								EVENTS
+							</router-link>
 							<a href="" class="p-4 text-gray-500 font-semibold hover:text-green-500 transition duration-300">COURSES</a>
-							<a href="" class="p-4 text-gray-500 font-semibold hover:text-green-500 transition duration-300">CATEGORIES</a>
+							<router-link 
+								:to="{ name: 'categories.index'}" 
+								:class="[($route.fullPath=='/categories' || $route.fullPath=='/category/'+ $route.params.slug) ? 'border-b-4 border-green-500' : '']"
+								class="p-4 text-gray-500 font-semibold hover:text-green-500 transition duration-300">
+								CATEGORIES
+							</router-link>
 							<a href="" class="p-4 text-gray-500 font-semibold hover:text-green-500 transition duration-300">ABOUT US</a>
 							<a href="" class="p-4 text-gray-500 font-semibold hover:text-green-500 transition duration-300">CONTACT US</a>
 						</div>

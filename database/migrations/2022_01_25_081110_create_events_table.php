@@ -29,6 +29,7 @@ class CreateEventsTable extends Migration
             $table->time('startTime');
             $table->time('endTime');
             $table->date('validUntil');
+            $table->integer('price')->default(0);
             $table->integer('limitParticipants')->default(0);   // set to 0 for unlimited seats
             $table->string('emailIncharge')->nullable();
             $table->boolean('isActive')->default(true);
