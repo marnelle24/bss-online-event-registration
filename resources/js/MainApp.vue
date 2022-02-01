@@ -1,8 +1,8 @@
 <template>
-    <div>
+    <section>
         <Navigation></Navigation>
         <router-view></router-view>
-    </div>
+    </section>
 </template>
 <script>
 import Navigation from './layouts/Navigation.vue';
