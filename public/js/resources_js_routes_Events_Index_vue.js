@@ -73,6 +73,14 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: 'event-card',
@@ -100,8 +108,14 @@ __webpack_require__.r(__webpack_exports__);
       var morningHour = time.hours() > 12 ? time.hours() - 12 : time.hours();
       var timeMinutes = time.minutes() < 10 ? '0' + time.minutes() : time.minutes();
       return morningHour + ':' + timeMinutes + ' ' + isMorning;
+    },
+    parsingJSONData: function parsingJSONData(theJson) {
+      return JSON.parse(theJson);
     }
-  }
+  } // created() {
+  //     console.log(this.parsingJSONData(this.event.onlineEventDetails));
+  // }
+
 });
 
 /***/ }),
@@ -21735,7 +21749,10 @@ var render = function () {
   var _c = _vm._self._c || _h
   return _c(
     "div",
-    { staticClass: "rounded overflow-hidden shadow-lg flex flex-col" },
+    {
+      staticClass:
+        "lg:rounded xl:rounded md:rounded overflow-hidden shadow-lg flex flex-col",
+    },
     [
       _c("img", {
         staticClass: "w-full self-start",
@@ -21842,50 +21859,77 @@ var render = function () {
           ]),
         ]),
         _vm._v(" "),
-        _c("p", { staticClass: "mt-1" }, [
-          _c(
-            "svg",
-            {
-              staticClass:
-                "h-5 w-5 text-gray-700 text-sm float-left mr-2 font-thin",
-              attrs: {
-                xmlns: "http://www.w3.org/2000/svg",
-                fill: "none",
-                viewBox: "0 0 24 20",
-                stroke: "currentColor",
+        _c(
+          "p",
+          { staticClass: "mt-2" },
+          [
+            _c(
+              "svg",
+              {
+                staticClass:
+                  "h-5 w-5 text-gray-700 text-sm float-left mr-2 font-thin",
+                attrs: {
+                  xmlns: "http://www.w3.org/2000/svg",
+                  fill: "none",
+                  viewBox: "0 0 24 24",
+                  stroke: "currentColor",
+                },
               },
-            },
-            [
-              _c("path", {
-                attrs: {
-                  "stroke-linecap": "round",
-                  "stroke-linejoin": "round",
-                  "stroke-width": "2",
-                  d: "M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z",
-                },
-              }),
-              _vm._v(" "),
-              _c("path", {
-                attrs: {
-                  "stroke-linecap": "round",
-                  "stroke-linejoin": "round",
-                  "stroke-width": "2",
-                  d: "M15 11a3 3 0 11-6 0 3 3 0 016 0z",
-                },
-              }),
-            ]
-          ),
-          _vm._v(" "),
-          _c("span", { staticClass: "text-gray-700 text-xs" }, [
-            _vm._v(
-              _vm._s(
-                _vm.event.venue === null
-                  ? "Online Event"
-                  : _vm.trimTextContent(_vm.event.venue, 50)
-              )
+              [
+                _c("path", {
+                  attrs: {
+                    "stroke-linecap": "round",
+                    "stroke-linejoin": "round",
+                    "stroke-width": "2",
+                    d: "M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z",
+                  },
+                }),
+                _vm._v(" "),
+                _c("path", {
+                  attrs: {
+                    "stroke-linecap": "round",
+                    "stroke-linejoin": "round",
+                    "stroke-width": "2",
+                    d: "M15 11a3 3 0 11-6 0 3 3 0 016 0z",
+                  },
+                }),
+              ]
             ),
-          ]),
-        ]),
+            _vm._v(" "),
+            _vm.event.eventType === "online"
+              ? [
+                  _c("img", {
+                    staticClass: "float-left mr-2",
+                    attrs: {
+                      src: "https://img.icons8.com/color/25/000000/zoom.png",
+                    },
+                  }),
+                  _vm._v(" "),
+                  _c(
+                    "span",
+                    { staticClass: "text-gray-700 text-lg font-font-semibold" },
+                    [
+                      _vm._v(
+                        "\n                    " +
+                          _vm._s(
+                            _vm.parsingJSONData(_vm.event.onlineEventDetails)
+                              .platform
+                          ) +
+                          "\n                "
+                      ),
+                    ]
+                  ),
+                ]
+              : _c("span", { staticClass: "text-gray-700 text-xs" }, [
+                  _vm._v(
+                    "\n                " +
+                      _vm._s(_vm.trimTextContent(_vm.event.venue, 50)) +
+                      "\n            "
+                  ),
+                ]),
+          ],
+          2
+        ),
         _vm._v(" "),
         _c("p", { staticClass: "mt-1" }, [
           _c(
@@ -21913,7 +21957,13 @@ var render = function () {
           ),
           _vm._v(" "),
           _c("span", { staticClass: "text-gray-700 text-sm" }, [
-            _vm._v(_vm._s(_vm.formatCurrency(_vm.event.price))),
+            _vm._v(
+              _vm._s(
+                _vm.event.price === 0
+                  ? "FREE"
+                  : _vm.formatCurrency(_vm.event.price)
+              )
+            ),
           ]),
         ]),
       ]),

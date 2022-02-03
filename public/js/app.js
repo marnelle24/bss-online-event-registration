@@ -2184,12 +2184,25 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: 'navigation',
   data: function data() {
     return {
       logo: '../storage/bss-logo.png'
     };
+  },
+  methods: {
+    getTotalItems: function getTotalItems() {
+      var getCartTotalItem = 0;
+      if (this.$store.state.cart.length <= 0) return getCartTotalItem;
+      this.$store.state.cart.forEach(function (value) {
+        getCartTotalItem = getCartTotalItem + value.quantity;
+      });
+      return getCartTotalItem;
+    }
   }
 });
 
@@ -2299,6 +2312,18 @@ var routes = [{
     return __webpack_require__.e(/*! import() */ "resources_js_routes_Events_Show_vue").then(__webpack_require__.bind(__webpack_require__, /*! ./routes/Events/Show.vue */ "./resources/js/routes/Events/Show.vue"));
   }
 }, {
+  path: '/departments',
+  name: 'departments.index',
+  component: function component() {
+    return __webpack_require__.e(/*! import() */ "resources_js_routes_Departments_Index_vue").then(__webpack_require__.bind(__webpack_require__, /*! ./routes/Departments/Index.vue */ "./resources/js/routes/Departments/Index.vue"));
+  }
+}, {
+  path: '/department/:slug',
+  name: 'departments.show',
+  component: function component() {
+    return __webpack_require__.e(/*! import() */ "resources_js_routes_Departments_Show_vue").then(__webpack_require__.bind(__webpack_require__, /*! ./routes/Departments/Show.vue */ "./resources/js/routes/Departments/Show.vue"));
+  }
+}, {
   path: '/categories',
   name: 'categories.index',
   component: function component() {
@@ -2327,6 +2352,11 @@ var routes = [{
   path: '/category',
   redirect: {
     name: 'categories.index'
+  }
+}, {
+  path: '/department',
+  redirect: {
+    name: 'departments.index'
   }
 }];
 
@@ -2358,13 +2388,14 @@ __webpack_require__.r(__webpack_exports__);
       // check if the selected event is already in the cart
       var eventInCartIndex = state.cart.findIndex(function (item) {
         return item.slug === event.slug;
-      }); // if the event is already selected
+      }); // check if the item is already in the cart
 
       if (eventInCartIndex !== -1) {
-        alert('Selected item already in the cart.');
+        state.cart[eventInCartIndex].quantity++;
         return;
       }
 
+      event.quantity = 1;
       state.cart.push(event);
     },
     removeFromCart: function removeFromCart(state, index) {
@@ -20107,20 +20138,28 @@ var render = function () {
             ]
           ),
           _vm._v(" "),
-          _c(
-            "div",
-            {
-              staticClass:
-                "text-xs font-semibold p-1 bg-green-300 bg-opacity-50 text-green-800 rounded-full",
-              staticStyle: {
-                "padding-block": "0px",
-                position: "relative",
-                top: "8px",
-                left: "7px",
-              },
-            },
-            [_vm._v("9")]
-          ),
+          this.$store.state.cart.length > 0
+            ? _c(
+                "div",
+                {
+                  staticClass:
+                    "text-xs font-semibold p-1 bg-green-300 bg-opacity-50 text-green-800 rounded-full",
+                  staticStyle: {
+                    "padding-block": "0px",
+                    position: "relative",
+                    top: "8px",
+                    left: "7px",
+                  },
+                },
+                [
+                  _vm._v(
+                    "\n\t\t\t\t\t\t\t" +
+                      _vm._s(_vm.getTotalItems()) +
+                      "\n\t\t\t\t\t\t"
+                  ),
+                ]
+              )
+            : _vm._e(),
           _vm._v(" "),
           _c("a", { staticClass: "mr-7", attrs: { href: "#" } }, [
             _c(
@@ -20226,75 +20265,17 @@ var render = function () {
       ]),
     ]),
     _vm._v(" "),
-    _vm._m(0),
-  ])
-}
-var staticRenderFns = [
-  function () {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "hidden mobile-menu" }, [
+    _c("div", { staticClass: "hidden mobile-menu" }, [
       _c("ul", {}, [
-        _c("li", { staticClass: "active" }, [
-          _c(
-            "a",
-            {
-              staticClass:
-                "block text-sm px-2 py-4 text-white bg-green-500 font-semibold",
-              attrs: { href: "index.html" },
-            },
-            [_vm._v("EVENTS")]
-          ),
-        ]),
+        _vm._m(0),
         _vm._v(" "),
-        _c("li", [
-          _c(
-            "a",
-            {
-              staticClass:
-                "block text-sm px-2 py-4 hover:bg-green-500 transition duration-300",
-              attrs: { href: "#services" },
-            },
-            [_vm._v("COURSES")]
-          ),
-        ]),
+        _vm._m(1),
         _vm._v(" "),
-        _c("li", [
-          _c(
-            "a",
-            {
-              staticClass:
-                "block text-sm px-2 py-4 hover:bg-green-500 transition duration-300",
-              attrs: { href: "#about" },
-            },
-            [_vm._v("CATEGORIES")]
-          ),
-        ]),
+        _vm._m(2),
         _vm._v(" "),
-        _c("li", [
-          _c(
-            "a",
-            {
-              staticClass:
-                "block text-sm px-2 py-4 hover:bg-green-500 transition duration-300",
-              attrs: { href: "#contact" },
-            },
-            [_vm._v("ABOUT US")]
-          ),
-        ]),
+        _vm._m(3),
         _vm._v(" "),
-        _c("li", [
-          _c(
-            "a",
-            {
-              staticClass:
-                "block text-sm px-2 py-4 hover:bg-green-500 transition duration-300",
-              attrs: { href: "#contact" },
-            },
-            [_vm._v("CONTACT US")]
-          ),
-        ]),
+        _vm._m(4),
         _vm._v(" "),
         _c("li", [
           _c(
@@ -20308,19 +20289,103 @@ var staticRenderFns = [
               _vm._v(
                 "\n                            CART\n                            "
               ),
-              _c(
-                "span",
-                {
-                  staticClass:
-                    "text-xs font-semibold p-1 bg-green-300 bg-opacity-50 text-green-800 rounded-full",
-                  staticStyle: { "padding-block": "0px" },
-                },
-                [_vm._v("9")]
-              ),
+              this.$store.state.cart.length > 0
+                ? _c(
+                    "span",
+                    {
+                      staticClass:
+                        "text-xs font-semibold p-1 bg-green-300 bg-opacity-50 text-green-800 rounded-full",
+                      staticStyle: { "padding-block": "0px" },
+                    },
+                    [_vm._v(_vm._s(this.$store.state.cart.length))]
+                  )
+                : _vm._e(),
             ]
           ),
         ]),
       ]),
+    ]),
+  ])
+}
+var staticRenderFns = [
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("li", { staticClass: "active" }, [
+      _c(
+        "a",
+        {
+          staticClass:
+            "block text-sm px-2 py-4 text-white bg-green-500 font-semibold",
+          attrs: { href: "index.html" },
+        },
+        [_vm._v("EVENTS")]
+      ),
+    ])
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("li", [
+      _c(
+        "a",
+        {
+          staticClass:
+            "block text-sm px-2 py-4 hover:bg-green-500 transition duration-300",
+          attrs: { href: "#services" },
+        },
+        [_vm._v("COURSES")]
+      ),
+    ])
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("li", [
+      _c(
+        "a",
+        {
+          staticClass:
+            "block text-sm px-2 py-4 hover:bg-green-500 transition duration-300",
+          attrs: { href: "#about" },
+        },
+        [_vm._v("CATEGORIES")]
+      ),
+    ])
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("li", [
+      _c(
+        "a",
+        {
+          staticClass:
+            "block text-sm px-2 py-4 hover:bg-green-500 transition duration-300",
+          attrs: { href: "#contact" },
+        },
+        [_vm._v("ABOUT US")]
+      ),
+    ])
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("li", [
+      _c(
+        "a",
+        {
+          staticClass:
+            "block text-sm px-2 py-4 hover:bg-green-500 transition duration-300",
+          attrs: { href: "#contact" },
+        },
+        [_vm._v("CONTACT US")]
+      ),
     ])
   },
 ]
@@ -37038,7 +37103,7 @@ module.exports = JSON.parse('{"_from":"axios@^0.21","_id":"axios@0.21.4","_inBun
 /******/ 		// This function allow to reference async chunks
 /******/ 		__webpack_require__.u = (chunkId) => {
 /******/ 			// return url for filenames not based on template
-/******/ 			if ({"resources_js_routes_Events_Index_vue":1,"resources_js_routes_Events_Show_vue":1,"resources_js_routes_Category_Index_vue":1,"resources_js_routes_Category_Show_vue":1,"resources_js_routes_Order_Checkout_vue":1,"resources_js_routes_Order_Summary_vue":1}[chunkId]) return "js/" + chunkId + ".js";
+/******/ 			if ({"resources_js_routes_Events_Index_vue":1,"resources_js_routes_Events_Show_vue":1,"resources_js_routes_Departments_Index_vue":1,"resources_js_routes_Departments_Show_vue":1,"resources_js_routes_Category_Index_vue":1,"resources_js_routes_Category_Show_vue":1,"resources_js_routes_Order_Checkout_vue":1,"resources_js_routes_Order_Summary_vue":1}[chunkId]) return "js/" + chunkId + ".js";
 /******/ 			// return url for filenames based on template
 /******/ 			return undefined;
 /******/ 		};

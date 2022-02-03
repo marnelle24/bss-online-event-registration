@@ -19,13 +19,15 @@ export default {
 
             // check if the selected event is already in the cart
             let eventInCartIndex = state.cart.findIndex( item => item.slug === event.slug);
-
-            // if the event is already selected
+            
+            // check if the item is already in the cart
             if(eventInCartIndex !== -1) {
-                alert('Selected item already in the cart.');
+                state.cart[eventInCartIndex].quantity++;
                 return;
             }
-            state.cart.push( event );
+            
+            event.quantity = 1;
+            state.cart.push(event);
         },
 
         removeFromCart( state, index ) {

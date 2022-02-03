@@ -15,6 +15,16 @@ export const routes = [
         component: () => import('./routes/Events/Show.vue')
     },
     {
+        path: '/departments',
+        name: 'departments.index',
+        component: () => import('./routes/Departments/Index.vue')
+    },
+    {
+        path: '/department/:slug',
+        name: 'departments.show',
+        component: () => import('./routes/Departments/Show.vue')
+    },
+    {
         path: '/categories',
         name: 'categories.index',
         component: () => import('./routes/Category/Index.vue')
@@ -40,5 +50,9 @@ export const routes = [
     {
         path: '/category',
         redirect: {name: 'categories.index'}
+    },
+    {
+        path: '/department',
+        redirect: {name: 'departments.index'}
     },
 ];

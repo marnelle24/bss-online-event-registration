@@ -13,6 +13,8 @@ class EventController extends Controller
     public function index() 
     {
         $events = Event::with('categories:id,slug,name')
+            ->with('speakers')
+            ->with('departments')
             ->get();
         return $events;
 
@@ -22,8 +24,10 @@ class EventController extends Controller
     public function show($id) 
     {
         $event = Event::where('id', $id)
-            ->with('categories:id,slug,name')
-            ->get();
+            ->with('categorie')
+            ->with('speakers')
+            ->with('departments')
+            ->first();
         return $event;
 
     }

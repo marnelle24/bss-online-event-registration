@@ -1,5 +1,5 @@
 <template>
-    <div class="rounded overflow-hidden shadow-lg flex flex-col">
+    <div class="lg:rounded xl:rounded md:rounded overflow-hidden shadow-lg flex flex-col">
         <img class="w-full self-start" :src="`/storage/${event.posterPath}`" :alt="event.title">
         <div class="p-6 self-center">
 
@@ -32,12 +32,20 @@
             </p>
 
             <!-- venue -->
-            <p class="mt-1">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-700 text-sm float-left mr-2 font-thin" fill="none" viewBox="0 0 24 20" stroke="currentColor">
+            <p class="mt-2">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-700 text-sm float-left mr-2 font-thin" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
                 </svg>
-                <span class="text-gray-700 text-xs">{{ event.venue === null ? 'Online Event' : trimTextContent(event.venue, 50) }}</span>
+                <template v-if="event.eventType === 'online'">
+                    <img src="https://img.icons8.com/color/25/000000/zoom.png" class="float-left mr-2"/>
+                    <span class="text-gray-700 text-lg font-font-semibold">
+                        {{ parsingJSONData(event.onlineEventDetails).platform }}
+                    </span>
+                </template>
+                <span v-else class="text-gray-700 text-xs">
+                    {{ trimTextContent(event.venue, 50) }}
+                </span>
             </p>
 
             <!-- price -->
@@ -45,7 +53,7 @@
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-700 text-sm float-left mr-2 font-thin" fill="none" viewBox="0 0 24 20" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z" />
                 </svg>
-                <span class="text-gray-700 text-sm">{{ formatCurrency(event.price) }}</span>
+                <span class="text-gray-700 text-sm">{{ event.price === 0 ? 'FREE' : formatCurrency(event.price) }}</span>
             </p>
 
         </div>
@@ -83,8 +91,14 @@ export default {
             let morningHour = (time.hours() > 12) ? (time.hours() - 12) : time.hours();
             let timeMinutes = (time.minutes() < 10 ? '0'+time.minutes() : time.minutes());
             return morningHour + ':' + timeMinutes + ' ' + isMorning;
+        },
+        parsingJSONData(theJson) {
+            return JSON.parse(theJson);
         }
-    }
+    },
+    // created() {
+    //     console.log(this.parsingJSONData(this.event.onlineEventDetails));
+    // }
 
 }
 </script>
