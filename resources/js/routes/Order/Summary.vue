@@ -1,6 +1,6 @@
 <template>
     <div class="w-full">
-        <div class="lg:w-2/3 w-full mx-auto mt-8 overflow-auto">
+        <div v-if="this.$store.state.order.length" class="lg:w-2/3 w-full mx-auto mt-8 overflow-auto">
             <h2 class="text-sm title-font text-gray-500 tracking-widest my-10" v-text="'Transaction ID: ' + order.transaction_id"></h2>
             <h4 class="text-gray-900 text-2xl title-font font-medium mb-4">Thank you for your purchase</h4>
             <table class="rounded-lg bg-white divide-y divide-gray-300 overflow-hidden w-full">
@@ -30,6 +30,10 @@
 </template>
 <script>
     export default {
+        created() {
+            if(!this.$store.state.order.length)
+                this.$router.push({ name: 'order.checkout' });
+        },
         methods: {
             cartLineTotal(item) {
                 let amount = item.price * item.pivot.quantity;

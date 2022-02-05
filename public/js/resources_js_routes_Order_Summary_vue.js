@@ -42,6 +42,11 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  created: function created() {
+    if (!this.$store.state.order.length) this.$router.push({
+      name: 'order.checkout'
+    });
+  },
   methods: {
     cartLineTotal: function cartLineTotal(item) {
       var amount = item.price * item.pivot.quantity;
@@ -161,87 +166,104 @@ var render = function () {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "w-full" }, [
-    _c("div", { staticClass: "lg:w-2/3 w-full mx-auto mt-8 overflow-auto" }, [
-      _c("h2", {
-        staticClass: "text-sm title-font text-gray-500 tracking-widest my-10",
-        domProps: {
-          textContent: _vm._s("Transaction ID: " + _vm.order.transaction_id),
-        },
-      }),
-      _vm._v(" "),
-      _c(
-        "h4",
-        { staticClass: "text-gray-900 text-2xl title-font font-medium mb-4" },
-        [_vm._v("Thank you for your purchase")]
-      ),
-      _vm._v(" "),
-      _c(
-        "table",
-        {
-          staticClass:
-            "rounded-lg bg-white divide-y divide-gray-300 overflow-hidden w-full",
-        },
-        [
-          _vm._m(0),
-          _vm._v(" "),
-          _c(
-            "tbody",
-            [
-              _vm._l(_vm.order.events, function (item) {
-                return _c(
-                  "tr",
-                  { key: item.id, staticClass: "border-b-2 border-gray-200" },
+    this.$store.state.order.length
+      ? _c(
+          "div",
+          { staticClass: "lg:w-2/3 w-full mx-auto mt-8 overflow-auto" },
+          [
+            _c("h2", {
+              staticClass:
+                "text-sm title-font text-gray-500 tracking-widest my-10",
+              domProps: {
+                textContent: _vm._s(
+                  "Transaction ID: " + _vm.order.transaction_id
+                ),
+              },
+            }),
+            _vm._v(" "),
+            _c(
+              "h4",
+              {
+                staticClass:
+                  "text-gray-900 text-2xl title-font font-medium mb-4",
+              },
+              [_vm._v("Thank you for your purchase")]
+            ),
+            _vm._v(" "),
+            _c(
+              "table",
+              {
+                staticClass:
+                  "rounded-lg bg-white divide-y divide-gray-300 overflow-hidden w-full",
+              },
+              [
+                _vm._m(0),
+                _vm._v(" "),
+                _c(
+                  "tbody",
                   [
-                    _c("td", {
-                      staticClass: "p-4",
-                      domProps: { textContent: _vm._s(item.title) },
+                    _vm._l(_vm.order.events, function (item) {
+                      return _c(
+                        "tr",
+                        {
+                          key: item.id,
+                          staticClass: "border-b-2 border-gray-200",
+                        },
+                        [
+                          _c("td", {
+                            staticClass: "p-4",
+                            domProps: { textContent: _vm._s(item.title) },
+                          }),
+                          _vm._v(" "),
+                          _c("td", {
+                            staticClass: "p-4",
+                            domProps: {
+                              textContent: _vm._s(item.pivot.quantity),
+                            },
+                          }),
+                          _vm._v(" "),
+                          _c("td", {
+                            staticClass: "p-4",
+                            domProps: {
+                              textContent: _vm._s(_vm.cartLineTotal(item)),
+                            },
+                          }),
+                        ]
+                      )
                     }),
                     _vm._v(" "),
-                    _c("td", {
-                      staticClass: "p-4",
-                      domProps: { textContent: _vm._s(item.pivot.quantity) },
-                    }),
-                    _vm._v(" "),
-                    _c("td", {
-                      staticClass: "p-4",
-                      domProps: {
-                        textContent: _vm._s(_vm.cartLineTotal(item)),
-                      },
-                    }),
-                  ]
-                )
-              }),
-              _vm._v(" "),
-              _c("tr", { staticClass: "border-t-2 bg-gray-100" }, [
-                _c("td", { staticClass: "p-4 font-bold text-left" }, [
-                  _vm._v("Total Amount"),
-                ]),
-                _vm._v(" "),
-                _c("td", {
-                  staticClass: "p-4 font-bold text-left",
-                  domProps: { textContent: _vm._s(_vm.orderQuantity) },
-                }),
-                _vm._v(" "),
-                _c("td", {
-                  staticClass: "p-4 font-bold text-left",
-                  domProps: { textContent: _vm._s(_vm.orderTotal) },
-                }),
-              ]),
-            ],
-            2
-          ),
-        ]
-      ),
-      _vm._v(" "),
-      _c(
-        "button",
-        {
-          staticClass:
-            "rounded-full bg-green-600 text-white py-2 px-4 mt-8 hover:bg-green-700",
-        },
-        [_vm._v("Print Receipt")]
-      ),
-    ]),
+                    _c("tr", { staticClass: "border-t-2 bg-gray-100" }, [
+                      _c("td", { staticClass: "p-4 font-bold text-left" }, [
+                        _vm._v("Total Amount"),
+                      ]),
+                      _vm._v(" "),
+                      _c("td", {
+                        staticClass: "p-4 font-bold text-left",
+                        domProps: { textContent: _vm._s(_vm.orderQuantity) },
+                      }),
+                      _vm._v(" "),
+                      _c("td", {
+                        staticClass: "p-4 font-bold text-left",
+                        domProps: { textContent: _vm._s(_vm.orderTotal) },
+                      }),
+                    ]),
+                  ],
+                  2
+                ),
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "button",
+              {
+                staticClass:
+                  "rounded-full bg-green-600 text-white py-2 px-4 mt-8 hover:bg-green-700",
+              },
+              [_vm._v("Print Receipt")]
+            ),
+          ]
+        )
+      : _vm._e(),
   ])
 }
 var staticRenderFns = [

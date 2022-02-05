@@ -52,11 +52,12 @@
         </div>
         <div v-if="cart.length" class="lg:ml-30 md:ml-0 sm:ml-0 w-100 border-b-1 mt-5">
             <button
+                @click="isProceedToPayment=true"
                 class="flex ml-auto bg-green-500 hover:bg-green-600 font-semibold rounded-full py-2 px-3 text-white">
                 PROCEED TO PAYMENT
             </button>
         </div>
-        <PaymentForm></PaymentForm>
+        <PaymentForm v-if="isProceedToPayment"></PaymentForm>
     </section>
 </template>
 <script>
@@ -65,6 +66,11 @@
     export default {
         components: {
             PaymentForm
+        },
+        data() {
+            return {
+                isProceedToPayment: false
+            }
         },
         computed: {
             cart() {

@@ -404,10 +404,16 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   components: {
     PaymentForm: _components_Order_PaymentForm_vue__WEBPACK_IMPORTED_MODULE_0__["default"]
+  },
+  data: function data() {
+    return {
+      isProceedToPayment: false
+    };
   },
   computed: {
     cart: function cart() {
@@ -1604,6 +1610,11 @@ var render = function () {
                 {
                   staticClass:
                     "flex ml-auto bg-green-500 hover:bg-green-600 font-semibold rounded-full py-2 px-3 text-white",
+                  on: {
+                    click: function ($event) {
+                      _vm.isProceedToPayment = true
+                    },
+                  },
                 },
                 [_vm._v("\n            PROCEED TO PAYMENT\n        ")]
               ),
@@ -1611,7 +1622,7 @@ var render = function () {
           )
         : _vm._e(),
       _vm._v(" "),
-      _c("PaymentForm"),
+      _vm.isProceedToPayment ? _c("PaymentForm") : _vm._e(),
     ],
     1
   )
