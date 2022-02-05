@@ -21,7 +21,7 @@ export const routes = [
     },
     {
         path: '/department/:slug',
-        name: 'departments.show',
+        name: 'department.show',
         component: () => import('./routes/Departments/Show.vue')
     },
     {

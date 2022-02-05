@@ -89,9 +89,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   computed: {
@@ -130,7 +127,7 @@ __webpack_require__.r(__webpack_exports__);
     addToCart: function addToCart(event) {
       var addtocart = {
         'event_id': event.id,
-        'event_name': event.name,
+        'event_name': event.title,
         'slug': event.slug,
         'amount': event.price
       };
@@ -21668,7 +21665,7 @@ var render = function () {
         "section",
         {
           staticClass:
-            "p-24 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6",
+            "p-7 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6",
         },
         [
           _c("div", { staticClass: "col-span-2" }, [
@@ -21682,7 +21679,7 @@ var render = function () {
             _vm._v(" "),
             _c(
               "p",
-              { staticClass: "text-gray-800 text-4xl font-semibold pt-5" },
+              { staticClass: "text-gray-800 text-4xl font-semibold pt-5 pb-3" },
               [_vm._v(_vm._s(_vm.event.title))]
             ),
             _vm._v(" "),
@@ -22010,11 +22007,6 @@ var render = function () {
                   1
                 )
               : _vm._e(),
-            _vm._v(" "),
-            _c("br"),
-            _vm._v(" "),
-            _c("br"),
-            _vm._v("\n        " + _vm._s(this.$store.state.cart) + "\n    "),
           ]),
         ]
       )

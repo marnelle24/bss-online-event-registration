@@ -1,9 +1,9 @@
 <template>
-    <section v-if="event" class="p-24 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+    <section v-if="event" class="p-7 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         <!-- <pre>{{ event }} </pre> -->
         <div class="col-span-2">
             <img class="w-full" :src="`/storage/${event.posterPath}`" :alt="event.title">
-            <p class="text-gray-800 text-4xl font-semibold pt-5">{{ event.title }}</p>
+            <p class="text-gray-800 text-4xl font-semibold pt-5 pb-3">{{ event.title }}</p>
             <div class="pb-6 mt-auto">
                 <span v-for="department in event.departments" :key="department.id" 
                     class="inline-block hover:bg-yellow-600 bg-yellow-800 rounded-full px-3 py-1 text-xs font-semibold text-white mr-2 mb-2 cursor-pointer">
@@ -69,9 +69,6 @@
             <div v-if="this.$store.state.cart.length > 0" class="mt-3 cursor-pointer hover:bg-green-500 bg-green-600 text-md text-white font-bold shadow-lg p-3 text-center">
                 <router-link :to="{ name: 'order.checkout'}" >PROCEED TO CHECKOUT</router-link>
             </div>
-            <br />
-            <br />
-            {{ this.$store.state.cart }}
         </div>
     </section>
 </template>
@@ -111,7 +108,7 @@ export default {
 
             let addtocart = {
                 'event_id'  : event.id,
-                'event_name': event.name,
+                'event_name': event.title,
                 'slug'   : event.slug,
                 'amount' : event.price
             };

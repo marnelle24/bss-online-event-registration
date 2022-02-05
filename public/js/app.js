@@ -2187,6 +2187,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: 'navigation',
   data: function data() {
@@ -2319,7 +2322,7 @@ var routes = [{
   }
 }, {
   path: '/department/:slug',
-  name: 'departments.show',
+  name: 'department.show',
   component: function component() {
     return __webpack_require__.e(/*! import() */ "resources_js_routes_Departments_Show_vue").then(__webpack_require__.bind(__webpack_require__, /*! ./routes/Departments/Show.vue */ "./resources/js/routes/Departments/Show.vue"));
   }
@@ -2378,7 +2381,8 @@ __webpack_require__.r(__webpack_exports__);
     events: [],
     departments: [],
     categories: [],
-    cart: []
+    cart: [],
+    order: {}
   },
   mutations: {
     updateEvents: function updateEvents(state, events) {
@@ -2403,6 +2407,9 @@ __webpack_require__.r(__webpack_exports__);
     },
     updateCart: function updateCart(state, cart) {
       state.cart = cart;
+    },
+    updateOrder: function updateOrder(state, order) {
+      state.order = order;
     }
   },
   actions: {
@@ -20114,58 +20121,14 @@ var render = function () {
           ),
         ]),
         _vm._v(" "),
-        _c("div", { staticClass: "hidden md:flex items-center" }, [
-          _c(
-            "svg",
-            {
-              staticClass: "h-6 w-6 mr-2 text-gray-400 cursor-pointer",
-              attrs: {
-                xmlns: "http://www.w3.org/2000/svg",
-                fill: "none",
-                viewBox: "0 0 24 24",
-                stroke: "currentColor",
-              },
-            },
-            [
-              _c("path", {
-                attrs: {
-                  "stroke-linecap": "round",
-                  "stroke-linejoin": "round",
-                  "stroke-width": "2",
-                  d: "M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z",
-                },
-              }),
-            ]
-          ),
-          _vm._v(" "),
-          this.$store.state.cart.length > 0
-            ? _c(
-                "div",
-                {
-                  staticClass:
-                    "text-xs font-semibold p-1 bg-green-300 bg-opacity-50 text-green-800 rounded-full",
-                  staticStyle: {
-                    "padding-block": "0px",
-                    position: "relative",
-                    top: "8px",
-                    left: "7px",
-                  },
-                },
-                [
-                  _vm._v(
-                    "\n\t\t\t\t\t\t\t" +
-                      _vm._s(_vm.getTotalItems()) +
-                      "\n\t\t\t\t\t\t"
-                  ),
-                ]
-              )
-            : _vm._e(),
-          _vm._v(" "),
-          _c("a", { staticClass: "mr-7", attrs: { href: "#" } }, [
+        _c(
+          "div",
+          { staticClass: "hidden md:flex items-center" },
+          [
             _c(
               "svg",
               {
-                staticClass: "h-6 w-6 text-gray-400 hover:text-green-500",
+                staticClass: "h-6 w-6 mr-2 text-gray-400 cursor-pointer",
                 attrs: {
                   xmlns: "http://www.w3.org/2000/svg",
                   fill: "none",
@@ -20179,45 +20142,101 @@ var render = function () {
                     "stroke-linecap": "round",
                     "stroke-linejoin": "round",
                     "stroke-width": "2",
-                    d: "M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z",
+                    d: "M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z",
                   },
                 }),
               ]
             ),
-          ]),
-          _vm._v(" "),
-          _c(
-            "a",
-            {
-              staticClass: "p-2 rounded-full bg-blue-50 hover:bg-blue-100",
-              attrs: { href: "#" },
-            },
-            [
-              _c(
-                "svg",
-                {
-                  staticClass: "w-6 h-6 text-gray-400 hover:text-gray-500",
-                  attrs: {
-                    xmlns: "http://www.w3.org/2000/svg",
-                    fill: "none",
-                    viewBox: "0 0 24 24",
-                    stroke: "currentColor",
-                  },
-                },
-                [
-                  _c("path", {
-                    attrs: {
-                      "stroke-linecap": "round",
-                      "stroke-linejoin": "round",
-                      "stroke-width": "2",
-                      d: "M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z",
+            _vm._v(" "),
+            this.$store.state.cart.length > 0
+              ? _c(
+                  "div",
+                  {
+                    staticClass:
+                      "text-xs font-semibold p-1 bg-green-300 bg-opacity-50 text-green-800 rounded-full",
+                    staticStyle: {
+                      "padding-block": "0px",
+                      position: "relative",
+                      top: "8px",
+                      left: "7px",
                     },
-                  }),
-                ]
-              ),
-            ]
-          ),
-        ]),
+                  },
+                  [
+                    _vm._v(
+                      "\n\t\t\t\t\t\t\t" +
+                        _vm._s(_vm.getTotalItems()) +
+                        "\n\t\t\t\t\t\t"
+                    ),
+                  ]
+                )
+              : _vm._e(),
+            _vm._v(" "),
+            _c(
+              "router-link",
+              {
+                staticClass: "mr-7",
+                attrs: { to: { name: "order.checkout" } },
+              },
+              [
+                _c(
+                  "svg",
+                  {
+                    staticClass: "h-6 w-6 text-gray-400 hover:text-green-500",
+                    attrs: {
+                      xmlns: "http://www.w3.org/2000/svg",
+                      fill: "none",
+                      viewBox: "0 0 24 24",
+                      stroke: "currentColor",
+                    },
+                  },
+                  [
+                    _c("path", {
+                      attrs: {
+                        "stroke-linecap": "round",
+                        "stroke-linejoin": "round",
+                        "stroke-width": "2",
+                        d: "M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z",
+                      },
+                    }),
+                  ]
+                ),
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "a",
+              {
+                staticClass: "p-2 rounded-full bg-blue-50 hover:bg-blue-100",
+                attrs: { href: "#" },
+              },
+              [
+                _c(
+                  "svg",
+                  {
+                    staticClass: "w-6 h-6 text-gray-400 hover:text-gray-500",
+                    attrs: {
+                      xmlns: "http://www.w3.org/2000/svg",
+                      fill: "none",
+                      viewBox: "0 0 24 24",
+                      stroke: "currentColor",
+                    },
+                  },
+                  [
+                    _c("path", {
+                      attrs: {
+                        "stroke-linecap": "round",
+                        "stroke-linejoin": "round",
+                        "stroke-width": "2",
+                        d: "M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z",
+                      },
+                    }),
+                  ]
+                ),
+              ]
+            ),
+          ],
+          1
+        ),
         _vm._v(" "),
         _c("div", { staticClass: "md:hidden flex items-center" }, [
           _c(

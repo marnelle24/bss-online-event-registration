@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\CategoryController;
 use App\Http\Controllers\Api\EventController;
 use App\Http\Controllers\Api\DepartmentController;
+use App\Http\Controllers\Api\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -34,3 +35,5 @@ Route::get('/category/{id}', [CategoryController::class, 'show']);
 Route::get('/departments', [DepartmentController::class, 'index']);
 
 Route::get('/department/{id}', [DepartmentController::class, 'show']);
+
+Route::post('/purchase', [UserController::class, 'purchase']);

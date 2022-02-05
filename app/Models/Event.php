@@ -25,4 +25,9 @@ class Event extends Model
     {
         return $this->belongsToMany(Department::class, 'department_event');
     }
+
+    public function orders() 
+    {
+        return $this->belongsToMany(Order::class);
+    }
 }

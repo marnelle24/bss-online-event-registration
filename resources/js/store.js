@@ -5,7 +5,8 @@ export default {
         events: [],
         departments: [],
         categories: [],
-        cart: []
+        cart: [],
+        order: {}
 
     },
 
@@ -36,6 +37,10 @@ export default {
 
         updateCart( state, cart ) {
             state.cart = cart;
+        },
+
+        updateOrder(state, order) {
+            state.order = order;
         }
 
     },
