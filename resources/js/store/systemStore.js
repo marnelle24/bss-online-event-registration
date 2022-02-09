@@ -1,13 +1,13 @@
+import axios from "axios"
+
 export default {
-
+    namespaced: true,
     state: {
-
         events: [],
         departments: [],
         categories: [],
         cart: [],
         order: {}
-
     },
 
     mutations: {
@@ -46,7 +46,7 @@ export default {
     },
 
     actions: {
-
+       
         getEvents({ commit }) {
             axios.get('/api/events')
                 .then((response) => {

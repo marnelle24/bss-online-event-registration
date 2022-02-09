@@ -7,6 +7,7 @@ use App\Http\Controllers\Api\CategoryController;
 use App\Http\Controllers\Api\EventController;
 use App\Http\Controllers\Api\DepartmentController;
 use App\Http\Controllers\Api\UserController;
+use App\Http\Controllers\Auth\AuthController;
 
 /*
 |--------------------------------------------------------------------------
@@ -24,16 +25,20 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 
+Route::post('/login', [AuthController::class, 'login']);
+Route::post('/me', [AuthController::class, 'me'])->middleware('auth:sanctum');
+
+
 Route::get('/events', [EventController::class, 'index']);
 
-Route::get('/event/{id}', [EventController::class, 'show']);
+// Route::get('/event/{id}', [EventController::class, 'show']);
 
 Route::get('/categories', [CategoryController::class, 'index']);
 
-Route::get('/category/{id}', [CategoryController::class, 'show']);
+// Route::get('/category/{id}', [CategoryController::class, 'show']);
 
 Route::get('/departments', [DepartmentController::class, 'index']);
 
-Route::get('/department/{id}', [DepartmentController::class, 'show']);
+// Route::get('/department/{id}', [DepartmentController::class, 'show']);
 
 Route::post('/purchase', [UserController::class, 'purchase']);

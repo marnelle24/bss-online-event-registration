@@ -1,48 +1,59 @@
 export const routes = [
 
     {
+        name:"homepage",
         path: '/',
-        redirect: {name: 'events.index'}
+        component: () => import('./layouts/Homepage.vue'),
+    },
+    {
+        name:"dashboard",
+        path: '/dashboard',
+        component: () => import('./components/Admin/Dashboard.vue'),
+    },
+    {
+        name: 'login',
+        path: '/login',
+        component: () => import('./components/Login.vue'),
     },
     {
         path: '/events',
         name: 'events.index',
-        component: () => import('./routes/Events/Index.vue')
+        component: () => import('./components/Event/Index.vue')
     },
     {
         path: '/event/:slug',
         name: 'event.show',
-        component: () => import('./routes/Events/Show.vue')
+        component: () => import('./components/Event/Show.vue')
     },
     {
         path: '/departments',
         name: 'departments.index',
-        component: () => import('./routes/Departments/Index.vue')
+        component: () => import('./components/Departments/Index.vue')
     },
     {
         path: '/department/:slug',
         name: 'department.show',
-        component: () => import('./routes/Departments/Show.vue')
+        component: () => import('./components/Departments/Show.vue')
     },
     {
         path: '/categories',
         name: 'categories.index',
-        component: () => import('./routes/Category/Index.vue')
+        component: () => import('./components/Category/Index.vue')
     },
     {
         path: '/category/:slug',
         name: 'category.show',
-        component: () => import('./routes/Category/Show.vue')
+        component: () => import('./components/Category/Show.vue')
     },
     {
         path: '/checkout',
         name: 'order.checkout',
-        component: () => import('./routes/Order/Checkout.vue')
+        component: () => import('./components/Order/Checkout.vue')
     },
     {
         path: '/summary',
         name: 'order.summary',
-        component: () => import('./routes/Order/Summary.vue')
+        component: () => import('./components/Order/Summary.vue')
     },
 
 
@@ -55,4 +66,4 @@ export const routes = [
         path: '/department',
         redirect: {name: 'departments.index'}
     },
-];
+]

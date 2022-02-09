@@ -61,7 +61,7 @@
     </section>
 </template>
 <script>
-    import PaymentForm from '../../components/Order/PaymentForm.vue';
+    import PaymentForm from './PaymentForm.vue';
     
     export default {
         components: {
